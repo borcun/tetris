@@ -2,7 +2,7 @@
 -- @brief The class has a block base properties
 -- @date Dec 26, 2015
 -- @author boo
--- @copyright free
+-- @copyright open source
 
 require( "utility" )
 

@@ -45,7 +45,7 @@ function BlockFactory:create( type_t )
       self.index = self.index + 1
       return self.index
    else
-      return -1
+      return FAIL
    end
 end
 

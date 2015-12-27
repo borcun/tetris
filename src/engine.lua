@@ -1,3 +1,9 @@
+-- @file engine.lua
+-- @brief
+-- @date Dec 27, 2015
+-- @author boo
+-- @copyright open source
+
 require( "block_factory" )
 require( "session" )
 
@@ -25,11 +31,21 @@ function Engine:run()
    local block_type = self.random_array[ rand_index ]
    local block_index = self.block_factory:create( block_type )
 
+   if FAIL == block_index then
+      print( "The current block can not created" )
+      os.exit()
+   end
+   
    cur_block = self.block_factory:get( block_index );
 
    rand_index = math.random( 0, self.random_size - 1 )
    block_type = self.random_array[ rand_index ]
    block_index = self.block_factory:create( block_type )
+
+   if FAIL == block_index then
+      print( "The next block can not created" )
+      os.exit()
+   end
 
    next_block = self.block_factory:get( block_index );
    
@@ -41,6 +57,12 @@ function Engine:run()
       rand_index = math.random( 0, self.random_size - 1 )
       block_type = self.random_array[ rand_index ]
       block_index = self.block_factory:create( block_type )
+
+      if FAIL == block_index then
+         print( "The next block can not created" )
+         os.exit()
+      end
+         
       next_block = self.block_factory:get( block_index );
    end
 end

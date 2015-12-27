@@ -1,3 +1,13 @@
+-- @file utility.lua
+-- @brief
+-- @date Dec 25, 2015
+-- @author boo
+-- @copyright open source
+
+-- fail and success
+FAIL = -1
+SUCCESS = 0
+
 -- block_t
 INVALID_BLOCK = -1
 B_SQUARE = 1
