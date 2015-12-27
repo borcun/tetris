@@ -7,6 +7,13 @@
 require( "block_factory" )
 require( "session" )
 
+local clock = os.clock
+-- seconds
+function sleep( n )
+  local t0 = clock()
+  while clock() - t0 <= n do end
+end
+
 Engine = {}
 Engine.__index = Engine
 
@@ -23,6 +30,11 @@ function Engine:new()
    return self
 end
 
+-- function that configure engine
+function Engine:configure( name )
+   self.session:setName( name )
+end
+
 -- function that runs engine
 function Engine:run()
    local cur_block = {}
@@ -30,12 +42,13 @@ function Engine:run()
    local rand_index = math.random( 0, self.random_size - 1 )
    local block_type = self.random_array[ rand_index ]
    local block_index = self.block_factory:create( block_type )
-
+   
    if FAIL == block_index then
       print( "The current block can not created" )
       os.exit()
    end
-   
+
+   table.insert( self.block_list, block_index )
    cur_block = self.block_factory:get( block_index );
 
    rand_index = math.random( 0, self.random_size - 1 )
@@ -47,7 +60,11 @@ function Engine:run()
       os.exit()
    end
 
+   table.insert( self.block_list, block_index )
    next_block = self.block_factory:get( block_index );
+
+   io.write( "The game is started for ", self.session:getName(), "\n" )
+   self.session:startTimer()
    
    for i = 0, 10, 1 do
       io.write( cur_block:getName() )
@@ -63,8 +80,14 @@ function Engine:run()
          os.exit()
       end
          
+      table.insert( self.block_list, block_index )
       next_block = self.block_factory:get( block_index );
+      sleep( 1 )
    end
+
+   self.session:stopTimer()
+   io.write( "The game is finished for ", self.session:getName(), "\n" )
+   io.write( "Total time is ", self.session:getDuration(), "\n" )
 end
 
 -- function that creates an array with frequencies of block to provide truly random
