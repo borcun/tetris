@@ -11,7 +11,7 @@ Block = { id, block_t, frequency, speed, color_t, state_t }
 Block.__index = Block
 
 -- constructor
-function Block:new( id, block_t, frequency, speed, color_t )
+function Block:new( id, block_t, name, frequency, speed, color_t )
    self = setmetatable( {}, Block )
 
    self.m_id = id
@@ -19,6 +19,7 @@ function Block:new( id, block_t, frequency, speed, color_t )
    self.m_frequency = frequency_t
    self.m_speed = speed_t
    self.m_color = color_t or DEFAULT_COLOR
+   self.name = name
    self.m_state = INVALID_STATE
    
    return self
@@ -37,6 +38,16 @@ end
 -- function that gets block type
 function Block:getType()
    return self.m_type
+end
+
+-- function that sets block name
+function Block:setName( name )
+   self.name = name
+end
+
+-- function that gets block name
+function Block:getName()
+   return self.name
 end
 
 -- function that sets block frequency

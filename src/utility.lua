@@ -7,14 +7,25 @@ B_Z = 4
 B_REVERSE_Z = 5
 B_T = 6
 
+-- block name
+INVALID_NAME = nil
+N_SQUARE = "square"
+N_STICK = "stick"
+N_L = "l"
+N_Z = "z"
+N_REVERSE_Z = "z"
+N_T = "t"
+
 -- frequency_t
 INVALID_FREQ = 0
-F_SQUARE = 6
+MIN_FREQUENCY = 1
+F_T = 1
 F_STICK = 2
-F_L = 5
 F_Z = 3
 F_REVERSE_Z = 4
-F_T = 1
+F_L = 5
+F_SQUARE = 6
+MAX_FREQUENCY = 6
 
 -- speed_t
 DEFAULT_SPEED = 1

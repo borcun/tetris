@@ -26,3 +26,14 @@ Non-Functional Requirements =
 
 - The class diagram is completed slightly. There will be more.
 - Block class is implemented.
+
+[ Dec 27, 2015 ]
+
+- The class diagram is improved but still uncompleted.
+- Reverse L block type will be added.
+- BlockFactory class is implemented.
+- Session class is implemented.
+- Engine class is being worked. Truly random number generator array will be created.
+  Now, it is created by static.
+- Engine:run function is managed a lua thread or love2d thread if it is possible.
+- Current Block and Next Block algorithm is implemented.

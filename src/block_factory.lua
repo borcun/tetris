@@ -21,27 +21,27 @@ end
 -- function that creates Block instance and gets its id
 function BlockFactory:create( type_t )  
    if B_SQUARE == type_t then
-      table.insert( self.block_list, Block:new( self.index, type_t, F_SQUARE, DEFAULT_SPEED, C_SQUARE ) )
+      table.insert( self.block_list, Block:new( self.index, type_t, N_SQUARE, F_SQUARE, DEFAULT_SPEED, C_SQUARE ) )
       self.index = self.index + 1
       return self.index
    elseif B_STICK == type_t then
-      table.insert( self.block_list, Block:new( self.index, type_t, F_STICK, DEFAULT_SPEED, C_STICK ) )
+      table.insert( self.block_list, Block:new( self.index, type_t, N_STICK, F_STICK, DEFAULT_SPEED, C_STICK ) )
       self.index = self.index + 1
       return self.index
    elseif B_L == type_t then
-      table.insert( self.block_list,  Block:new( self.index, type_t, F_L, DEFAULT_SPEED, C_L ) )
+      table.insert( self.block_list,  Block:new( self.index, type_t, N_L, F_L, DEFAULT_SPEED, C_L ) )
       self.index = self.index + 1
       return self.index
    elseif B_Z == type_t then
-      table.insert( self.block_list, Block:new( self.index, type_t, F_Z, DEFAULT_SPEED, C_Z ) )
+      table.insert( self.block_list, Block:new( self.index, type_t, N_Z, F_Z, DEFAULT_SPEED, C_Z ) )
       self.index = self.index + 1
       return self.index
    elseif B_REVERSE_Z == type_t then
-      table.insert( self.block_list, Block:new( self.index, type_t, F_REVERSE_Z, DEFAULT_SPEED, C_REVERSE_Z ) )
+      table.insert( self.block_list, Block:new( self.index, type_t, N_REVERSE_Z, F_REVERSE_Z, DEFAULT_SPEED, C_REVERSE_Z ) )
       self.index = self.index + 1
       return self.index
    elseif B_T == type_t then
-      table.insert( self.block_list, Block:new( self.index, type_t, F_T, DEFAULT_SPEED, C_T ) )
+      table.insert( self.block_list, Block:new( self.index, type_t, N_T, F_T, DEFAULT_SPEED, C_T ) )
       self.index = self.index + 1
       return self.index
    else
