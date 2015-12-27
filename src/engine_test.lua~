@@ -1,4 +1,0 @@
-require( "engine" )
-
-engine = Engine:new()
-engine:run()
