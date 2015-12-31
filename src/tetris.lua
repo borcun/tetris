@@ -12,9 +12,6 @@ Tetris.__index = Tetris
 -- constructor
 function Tetris:new()
    self = setmetatable( {}, Tetris )
-
-   print( "Tetris:new" )
-   
    self.engine = Engine:new()
 
    return self

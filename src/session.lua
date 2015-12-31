@@ -12,9 +12,6 @@ Session.__index = Session
 -- default constructor
 function Session:new()
    self = setmetatable( {}, Session )
-
-   print( "Session:new" )
-   
    self.point = 0
    self.name = "player"
    self.duration = 0

@@ -7,22 +7,12 @@
 require( "block_factory" )
 require( "session" )
 
-local clock = os.clock
--- seconds
-function sleep( n )
-  local t0 = clock()
-  while clock() - t0 <= n do end
-end
-
 Engine = { block_factory, session, block_list, random_array, random_size }
 Engine.__index = Engine
 
 -- constructor
 function Engine:new()
    self = setmetatable( {}, Engine )
-
-   print( "Engine:new" )
-
    self.block_factory = BlockFactory:new()
    self.session = Session:new()
    self.block_list = {}
