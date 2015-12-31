@@ -14,19 +14,22 @@ function sleep( n )
   while clock() - t0 <= n do end
 end
 
-Engine = {}
+Engine = { block_factory, session, block_list, random_array, random_size }
 Engine.__index = Engine
 
 -- constructor
 function Engine:new()
    self = setmetatable( {}, Engine )
+
+   print( "Engine:new" )
+
    self.block_factory = BlockFactory:new()
    self.session = Session:new()
    self.block_list = {}
    self.random_array = {}
    self.random_size = math.floor( MAX_FREQUENCY * ( MAX_FREQUENCY + 1 ) / 2 )
    math.randomseed( os.time() )
-      
+
    return self
 end
 
@@ -88,6 +91,11 @@ function Engine:run()
    self.session:stopTimer()
    io.write( "The game is finished for ", self.session:getName(), "\n" )
    io.write( "Total time is ", self.session:getDuration(), "\n" )
+end
+
+-- function that waits the run thread
+function Engine:wait()
+
 end
 
 -- function that creates an array with frequencies of block to provide truly random

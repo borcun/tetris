@@ -7,7 +7,7 @@
 require( "utility" )
 
 -- Meta Class
-Block = { id, block_t, frequency, speed, color_t, state_t }
+Block = { id, block_t, name, frequency, speed, color_t, state_t }
 Block.__index = Block
 
 -- constructor

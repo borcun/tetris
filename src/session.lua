@@ -6,16 +6,19 @@
 
 require( "utility" )
 
-Session = { point, name, duration }
+Session = { point, name, duration, start_time }
 Session.__index = Session
 
--- constructor
+-- default constructor
 function Session:new()
    self = setmetatable( {}, Session )
+
+   print( "Session:new" )
+   
    self.point = 0
    self.name = "player"
    self.duration = 0
-   self.starttime = 0
+   self.start_time = 0
    
    return self
 end
@@ -47,12 +50,12 @@ end
 
 -- function that start timer
 function Session:startTimer()
-   self.starttime = os.time()
+   self.start_time = os.time()
 end
 
 -- function that stops timer
 function Session:stopTimer()
-   self.duration = self.duration + os.difftime( os.time(), self.starttime )
+   self.duration = self.duration + os.difftime( os.time(), self.start_time )
 end
 
 
