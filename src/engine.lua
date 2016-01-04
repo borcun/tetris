@@ -18,6 +18,9 @@ function Engine:new()
    self.block_list = {}
    self.random_array = {}
    self.random_size = math.floor( MAX_FREQUENCY * ( MAX_FREQUENCY + 1 ) / 2 )
+   self.cur_block = Block:new()
+   self.next_block = Block:new()
+   self.state = STOPPED
    math.randomseed( os.time() )
 
    return self
@@ -28,68 +31,8 @@ function Engine:configure( name )
    self.session:setName( name )
 end
 
--- function that runs engine
-function Engine:run()
-   local cur_block = {}
-   local next_block = {}
-   local rand_index = math.random( 0, self.random_size - 1 )
-   local block_type = self.random_array[ rand_index ]
-   local block_index = self.block_factory:create( block_type )
-   
-   if FAIL == block_index then
-      print( "The current block can not created" )
-      os.exit()
-   end
-
-   table.insert( self.block_list, block_index )
-   cur_block = self.block_factory:get( block_index );
-
-   rand_index = math.random( 0, self.random_size - 1 )
-   block_type = self.random_array[ rand_index ]
-   block_index = self.block_factory:create( block_type )
-
-   if FAIL == block_index then
-      print( "The next block can not created" )
-      os.exit()
-   end
-
-   table.insert( self.block_list, block_index )
-   next_block = self.block_factory:get( block_index );
-
-   io.write( "The game is started for ", self.session:getName(), "\n" )
-   self.session:startTimer()
-   
-   for i = 0, 10, 1 do
-      io.write( cur_block:getName() )
-      io.write( " [ next ", next_block:getName(), " ]\n" )
-      cur_block = next_block;
-
-      rand_index = math.random( 0, self.random_size - 1 )
-      block_type = self.random_array[ rand_index ]
-      block_index = self.block_factory:create( block_type )
-
-      if FAIL == block_index then
-         print( "The next block can not created" )
-         os.exit()
-      end
-         
-      table.insert( self.block_list, block_index )
-      next_block = self.block_factory:get( block_index );
-      sleep( 1 )
-   end
-
-   self.session:stopTimer()
-   io.write( "The game is finished for ", self.session:getName(), "\n" )
-   io.write( "Total time is ", self.session:getDuration(), "\n" )
-end
-
--- function that waits the run thread
-function Engine:wait()
-
-end
-
 -- function that creates an array with frequencies of block to provide truly random
-function Engine:createRandomArray()
+function Engine:init()
    -- TODO: create a random array with truly random number generator algorithm
 
    self.random_array[ 0 ] = B_T
@@ -113,4 +56,101 @@ function Engine:createRandomArray()
    self.random_array[ 18 ] = B_SQUARE
    self.random_array[ 19 ] = B_SQUARE
    self.random_array[ 20 ] = B_SQUARE
+
+   local rand_index = math.random( 0, self.random_size - 1 )
+   local block_type = self.random_array[ rand_index ]
+   local block_index = self.block_factory:create( block_type )
+   
+   if FAIL == block_index then
+      print( "The block can not created" )
+      os.exit()
+   end
+
+   table.insert( self.block_list, block_index )
+   self.next_block = self.block_factory:get( block_index );
+   self.cur_block = self.next_block
+end
+
+-- function that starts the engine
+function Engine:start()
+   if STOPPED == self.state then
+      io.write( "The game is started for ", self.session:getName(), "\n" )
+      self.session:startTimer()
+      self.state = ENG_PLAY
+   end
+
+   return self.state
+end
+
+-- function that samples the game
+function Engine:sample()
+   if STOPPED == self.state then
+      return {}
+   end
+
+   local blocks = {}
+   local rand_index = math.random( 0, self.random_size - 1 )
+   local block_type = self.random_array[ rand_index ]
+   local block_index = self.block_factory:create( block_type )
+   
+   if FAIL == block_index then
+      print( "The current block can not created" )
+      os.exit()
+   end
+
+   table.insert( self.block_list, block_index )
+   self.next_block = self.block_factory:get( block_index );
+
+   blocks[ 1 ] = self.cur_block
+   self.cur_block = self.next_block;
+   blocks[ 2 ] = self.next_block
+
+   return blocks
+end
+
+-- function that stops the game
+function Engine:stop()
+   if ENG_PLAY == self.state then
+      self.state = ENG_STOP
+      self.session:stopTimer()
+   end
+
+   return self.state
+end
+
+-- function that resumes the game
+function Engine:resume()
+   if ENG_STOP == self.state then
+      self.state = ENG_PLAY
+      self.session:startTimer()
+   end
+
+   return self.state
+end
+
+-- function that quits from game
+function Engine:quit()
+   self.state = ENG_QUIT
+   self.session:stopTimer()
+
+   return self.state
+end
+
+-- function that gets engine message
+function Engine:message()
+   if ENG_STOP == self.state then
+      return "The game is stopped\n" .. 
+	 "The duration is " .. 
+	 self.session:getDuration() ..
+	 "\nThe score is " ..
+	 self.session:score( 5 ) .. "\n"
+   elseif ENG_QUIT == self.state then
+      return "The game is over\n" .. 
+	 "The duration is " .. 
+	 self.session:getDuration() ..
+	 "\nThe score is " ..
+	 self.session:score( 10 ) .. "\n"
+   else
+      return "No message"
+   end
 end

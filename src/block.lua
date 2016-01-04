@@ -7,7 +7,7 @@
 require( "utility" )
 
 -- Meta Class
-Block = { id, block_t, name, frequency, speed, color_t, state_t }
+Block = { id, block_t, name, frequency, speed, color_t }
 Block.__index = Block
 
 -- constructor
@@ -20,7 +20,6 @@ function Block:new( id, block_t, name, frequency, speed, color_t )
    self.m_speed = speed_t
    self.m_color = color_t or DEFAULT_COLOR
    self.name = name
-   self.m_state = INVALID_STATE
    
    return self
 end
@@ -78,16 +77,6 @@ end
 -- function that gets block color
 function Block:getColor()
    return self.m_color
-end
-
--- function that sets block state
-function Block:setState( state_t )
-   self.m_state = state_t
-end
-
--- function that gets block state
-function Block:getState()
-   return self.m_state
 end
 
 -- tostring

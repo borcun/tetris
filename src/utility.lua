@@ -4,6 +4,19 @@
 -- @author boo
 -- @copyright open source
 
+-- game state
+ENG_STOP = 0
+ENG_PLAY = 1
+ENG_QUIT = 2
+
+-- key command
+INIT = "i"
+STOP = "s"
+RESUME = "r"
+START = " "
+QUIT = "q"
+IDLE = "x"
+
 -- fail and success
 FAIL = -1
 SUCCESS = 0
@@ -51,11 +64,6 @@ C_L = 3
 C_Z = 4
 C_REVERSE_Z = 5
 C_T = 6
-
--- state
-INVALID_STATE = -1
-PASSIVE = 0
-ACTIVE = 1
 
 -- line point
 POINT = 1
