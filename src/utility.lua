@@ -9,6 +9,16 @@ ENG_STOP = 0
 ENG_PLAY = 1
 ENG_QUIT = 2
 
+-- screen width and height
+WIDTH = 400
+HEIGHT = 640
+TITLE = "TETRIS"
+
+-- backgroud color codes
+RED = 255
+GREEN = 153
+BLUE = 204
+
 -- key command
 INIT = "i"
 STOP = "s"

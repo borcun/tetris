@@ -1,6 +1,6 @@
 -- @file tetris.lua
--- @brief
--- @date Dec 28, 2015
+-- @brief tetris game
+-- @date Jan 7, 2016
 -- @author boo
 -- @copyright open source
 
@@ -13,36 +13,41 @@ Tetris.__index = Tetris
 function Tetris:new()
    self = setmetatable( {}, Tetris )
    self.engine = Engine:new()
-
    return self
 end
 
--- function that initializes the game
+-- function that initialize the tetris
 function Tetris:init( name )
    self.engine:configure( name )
-   self.engine:createRandomArray()
-   return true
+   self.engine:init()
 end
 
--- function that starts the game
+-- function that gets two block which are current and next
+function Tetris:blocks()
+   return self.engine:sample()
+end
+
+-- function that gets information state
+function Tetris:state()
+   return self.engine:message()
+end
+
+-- function that starts the tetris
 function Tetris:play()
-   self.engine:run()
-   return true
+   self.engine:start()
 end
 
--- function that stops the game
+-- function that stops the tetris
 function Tetris:stop()
-   self.engine:wait()
-   return true
+   return self.engine:stop()
 end
 
--- function that resumes the stopped game
+-- function that resume the tetris
 function Tetris:resume()
-   
+   return self.engine:resume()
 end
 
--- function that quits from the game
-function Tetris:quit()
-   -- TODO exit operation will be improved
-   os.exit()
+-- function that finishes the tetris
+function Tetris:finish()
+   return self.engine:quit()
 end
