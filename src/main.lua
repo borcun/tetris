@@ -76,10 +76,7 @@ function love.update( dt )
       objects.block1.fixture = love.physics.newFixture( objects.block1.body, objects.block1.shape, 5 )
       objects.block2.fixture = love.physics.newFixture( objects.block2.body, objects.block2.shape, 5 )
 
-      objects.block1.body:setLinearVelocity( 0, 0 )
-      objects.block2.body:setLinearVelocity( 0, 0 )
-
-      sleep( 3 )
+      sleep( 2 )
    end
 end
 
