@@ -69,6 +69,12 @@ function Engine:init()
    table.insert( self.block_list, block_index )
    self.next_block = self.block_factory:get( block_index );
    self.cur_block = self.next_block
+
+   -- create world
+   --the height of a meter our worlds will be 64px
+   love.physics.setMeter(64) 
+   --create a world for the bodies to exist in with horizontal gravity of 0 and vertical gravity of 9.81
+   world = love.physics.newWorld(0, 9.81*64, true) 
 end
 
 -- function that starts the engine

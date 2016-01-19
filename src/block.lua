@@ -11,7 +11,7 @@ Block = { id, block_t, name, frequency, speed, color_t }
 Block.__index = Block
 
 -- constructor
-function Block:new( id, block_t, name, frequency, speed, color_t )
+function Block:new( id, type_t, name, frequency, speed, color_t )
    self = setmetatable( {}, Block )
 
    self.m_id = id

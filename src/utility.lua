@@ -15,9 +15,9 @@ HEIGHT = 640
 TITLE = "TETRIS"
 
 -- backgroud color codes
-RED = 255
-GREEN = 153
-BLUE = 204
+RED = 104
+GREEN = 136
+BLUE = 248
 
 -- key command
 INIT = "i"
@@ -77,6 +77,19 @@ C_T = 6
 
 -- line point
 POINT = 1
+
+-- current block position
+CUR_POS_X = HEIGHT / 2 - 120
+CUR_POS_Y = 100
+
+-- next block position
+NEXT_POS_X = HEIGHT - 10
+NEXT_POS_Y = 120
+
+-- block dimension
+D_SQUARE = 40
+D_STICK_WIDTH = 80
+D_STICK_HEIGHT = 20
 
 function sleep( n )
   local t0 = os.clock()
